@@ -1,0 +1,33 @@
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sky_take_out
+    username: root
+    password: 1010
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: YOUR_ACCESS_KEY_ID
+    access-key-secret: YOUR_ACCESS_KEY_SECRET
+    bucket-name: wyq-sky
+  redis:
+    host: localhost
+    port: 6379
+    password: 1010
+    #redis默认创建的15个数据库DB0-15，每个数据库相互独立，在此可规定选择的数据库(默认是0)
+    database: 1
+  wechat:
+    appid: YOUR_WECHAT_APPID
+    secret: YOUR_WECHAT_SECRET
+    mchid: 1561414331 #商户号
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606 #商户API证书的证书序列号
+    privateKeyFilePath: D:\apiclient_key.pem #商户私钥文件
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3 #证书解密的密钥
+    weChatPayCertFilePath: D:\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem #平台证书
+    notifyUrl: https://wdwm.dtwyq.ip-ddns.com/notify/paySuccess #支付成功的回调地址:微信后台来访问的地址，需要公网ip
+    refundNotifyUrl: https://wdwm.dtwyq.ip-ddns.com/notify/refundFail #退款成功的回调地址:微信后台来访问的地址，需要公网ip，尚未开发
+  shop:
+    address: 天津市南开区卫津路92号
+  baidu:
+    ak: YOUR_BAIDU_MAP_AK
