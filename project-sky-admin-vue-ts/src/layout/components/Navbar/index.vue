@@ -4,42 +4,53 @@
       <hamburger id="hamburger-container"
                  :is-active="sidebar.opened"
                  class="hamburger-container"
-                 @toggleClick="toggleSideBar" />
+                 @toggleClick="toggleSideBar"
+      />
       <span v-if="status===1"
-            class="businessBtn">营业中</span>
+            class="businessBtn"
+      >营业中</span>
       <span v-else
-            class="businessBtn closing">打烊中</span>
+            class="businessBtn closing"
+      >打烊中</span>
     </div>
 
     <div :key="restKey"
-         class="right-menu">
+         class="right-menu"
+    >
       <div class="rightStatus">
         <audio ref="audioVo"
-               hidden>
-          <source src="./../../../assets/preview.mp3" type="audio/mp3" />
+               hidden
+        >
+          <source src="./../../../assets/preview.mp3" type="audio/mp3">
         </audio>
         <audio ref="audioVo2"
-               hidden>
-          <source src="./../../../assets/reminder.mp3" type="audio/mp3" />
+               hidden
+        >
+          <source src="./../../../assets/reminder.mp3" type="audio/mp3">
         </audio>
         <span class="navicon operatingState" @click="handleStatus"><i />营业状态设置</span>
       </div>
       <div class="avatar-wrapper">
         <div :class="shopShow?'userInfo':''"
              @mouseenter="toggleShow"
-             @mouseleave="mouseLeaves">
+             @mouseleave="mouseLeaves"
+        >
           <el-button type="primary"
-                     :class="shopShow?'active':''">
+                     :class="shopShow?'active':''"
+          >
             {{ name }}<i class="el-icon-arrow-down" />
           </el-button>
           <div v-if="shopShow"
-               class="userList">
+               class="userList"
+          >
             <p class="amendPwdIcon"
-               @click="handlePwd">
+               @click="handlePwd"
+            >
               修改密码<i />
             </p>
             <p class="outLogin"
-               @click="logout">
+               @click="logout"
+            >
               退出登录<i />
             </p>
           </div>
@@ -50,7 +61,8 @@
     <el-dialog title="营业状态设置"
                :visible.sync="dialogVisible"
                width="25%"
-               :show-close="false">
+               :show-close="false"
+    >
       <el-radio-group v-model="setStatus">
         <el-radio :label="1">
           营业中
@@ -62,16 +74,19 @@
         </el-radio>
       </el-radio-group>
       <span slot="footer"
-            class="dialog-footer">
+            class="dialog-footer"
+      >
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary"
-                   @click="handleSave">确 定</el-button>
+                   @click="handleSave"
+        >确 定</el-button>
       </span>
     </el-dialog>
     <!-- end -->
     <!-- 修改密码 -->
     <Password :dialog-form-visible="dialogFormVisible"
-              @handleclose="handlePwdClose" />
+              @handleclose="handlePwdClose"
+    />
     <!-- end -->
   </div>
 </template>

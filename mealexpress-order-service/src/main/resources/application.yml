@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: order-service
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:127.0.0.1:8858}
+        port: ${SENTINEL_ORDER_PORT:8722}
+      eager: true
+    alibaba:
+      seata:
+        tx-service-group: ${SEATA_TX_GROUP:mealexpress_tx_group}
+
+springfox:
+  documentation:
+    enabled: false
+
+server:
+  port: 8083
+
+seata:
+  service:
+    vgroup-mapping:
+      ${SEATA_TX_GROUP:mealexpress_tx_group}: default
+    grouplist:
+      default: ${SEATA_SERVER_ADDR:127.0.0.1:8091}
+  client:
+    rm:
+      report-success-enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

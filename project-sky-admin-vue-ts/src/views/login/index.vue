@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-box">
-      <img src="@/assets/login/login-l.png" alt="" />
+      <img src="@/assets/login/login-l.png" alt="">
       <div class="login-form">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
           <div class="login-form-title">
@@ -9,7 +9,7 @@
               src="@/assets/login/icon_logo.png"
               style="width: 149px; height: 38px"
               alt=""
-            />
+            >
             <!-- <span class="title-label">苍穹外卖</span> -->
           </div>
           <el-form-item prop="username">
@@ -94,7 +94,7 @@ export default class extends Vue {
 
   // 登录
   private handleLogin() {
-    ;(this.$refs.loginForm as ElForm).validate(async (valid: boolean) => {
+    (this.$refs.loginForm as ElForm).validate(async (valid: boolean) => {
       if (valid) {
         this.loading = true
         await UserModule.Login(this.loginForm as any)

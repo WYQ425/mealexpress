@@ -15,100 +15,95 @@
               ountUnread === 0 ? null : ountUnread > 99 ? '99+' : ountUnread
             "
             :hidden="!([1].includes(item.value) && ountUnread)"
-            >{{ item.label }}</el-badge
           >
+            {{ item.label }}
+          </el-badge>
         </li>
       </ul>
 
       <el-button
+        v-if="status === 1 && baseData.length > 0"
         icon="iconfont icon-clear"
         class="right-el-button"
-        v-if="status === 1 && baseData.length > 0"
         @click="handleBatch"
-        >全部已读</el-button
       >
+        鍏ㄩ儴宸茶
+      </el-button>
       <el-button
+        v-else
         icon="iconfont icon-clear"
         class="right-el-button onbutton"
         disabled
-        v-else
-        >全部已读</el-button
       >
+        鍏ㄩ儴宸茶
+      </el-button>
     </div>
     <div class="container newBox" :class="{ hContainer: baseData.length }">
-      <div class="informList" v-if="baseData.length > 0">
+      <div v-if="baseData.length > 0" class="informList">
         <div v-for="(item, index) in baseData" :key="index">
-          <!-- 待接单 -->
-          <div class="item" v-if="item.type === 1">
+          <!-- 寰呮帴鍗?-->
+          <div v-if="item.type === 1" class="item">
             <div class="tit">
-              <span>【待接单】</span>{{ item.arrNew[0]
+              <span>銆愬緟鎺ュ崟銆?/span>{{ item.arrNew[0]
               }}<span class="fontOrderTip" @click="handleSetStatus(item.id)">
                 <router-link :to="'/order?status=' + 2">{{
                   item.arrNew[1]
-                }}</router-link></span
-              >{{ item.arrNew[2]
+                }}</router-link></span>{{ item.arrNew[2]
               }}<span class="time">{{ item.createTime }}</span>
+              </span>
             </div>
           </div>
-          <div class="item" v-if="item.type === 2">
+          <div v-if="item.type === 2" class="item">
             <div class="tit">
-              <i>急</i><span>【待接单】</span>{{ item.arrNew[0]
-              }}<span class="fontOrderTip" @click="handleSetStatus(item.id)"
-                ><router-link :to="'/order?status=' + 2">{{
-                  item.arrNew[1]
-                }}</router-link></span
-              >{{ item.arrNew[2]
+              <i>鎬?/i><span>銆愬緟鎺ュ崟銆?/span>{{ item.arrNew[0]
+              }}<span class="fontOrderTip" @click="handleSetStatus(item.id)"><router-link :to="'/order?status=' + 2">{{
+                item.arrNew[1]
+              }}</router-link></span>{{ item.arrNew[2]
               }}<span class="time">{{ item.createTime }}</span>
+              </span></i>
             </div>
           </div>
           <!-- end -->
-          <!-- 待派送 -->
-          <div class="item" v-if="item.type === 3">
+          <!-- 寰呮淳閫?-->
+          <div v-if="item.type === 3" class="item">
             <div class="tit">
-              <span>【待派送】</span>{{ item.arrNew[0]
-              }}<span class="fontOrderTip" @click="handleSetStatus(item.id)"
-                ><router-link :to="'/order?status=' + 2">{{
-                  item.arrNew[1]
-                }}</router-link></span
-              >{{ item.arrNew[2]
+              <span>銆愬緟娲鹃€併€?/span>{{ item.arrNew[0]
+              }}<span class="fontOrderTip" @click="handleSetStatus(item.id)"><router-link :to="'/order?status=' + 2">{{
+                item.arrNew[1]
+              }}</router-link></span>{{ item.arrNew[2]
               }}<span class="time">{{ item.createTime }}</span>
+              </span>
             </div>
           </div>
           <!-- end -->
-          <!-- 催单 -->
+          <!-- 鍌崟 -->
           <div
-            class="item"
             v-if="item.type === 4"
+            class="item"
             @mouseenter="toggleShow(item.id, index)"
             @mouseleave="mouseLeaves(index)"
           >
             <div :class="isActive ? 'titAlready' : ''">
               <div class="tit">
-                <span>【催单】</span>{{ item.arrNew[0] }}
-                <!-- <span
+                <span>銆愬偓鍗曘€?/span>{{ item.arrNew[0] }}
+                  <!-- <span
                   class="fontOrderTip"
-                  >去处理</span
+                  >鍘诲鐞?/span
                 > -->
-                <span class="time">{{ item.createTime }}</span>
+                  <span class="time">{{ item.createTime }}</span>
+                </span>
               </div>
               <div v-if="shopShow && showIndex === index" class="orderInfo">
                 <p>
-                  <span
-                    ><label>下单时间：</label>{{ item.details.orderTime }}</span
-                  ><span
-                    ><label>预计送达时间：</label
-                    >{{ item.details.estimatedDeliveryTime }}</span
-                  >
+                  <span><label>涓嬪崟鏃堕棿锛?/label>{{ item.details.orderTime }}</label></span><span><label>棰勮閫佽揪鏃堕棿锛?/label>{{ item.details.estimatedDeliveryTime }}</label></span>
                 </p>
                 <p>
-                  {{ item.details.consignee }}，{{ item.details.phone }}，{{
-                    item.details.address
+                  {{ item.details.consignee }}锛寋{ item.details.phone }}锛寋{
+                  item.details.address
                   }}
                 </p>
                 <p>
-                  <span
-                    ><label>菜品：</label>{{ item.details.orderDishes }}</span
-                  >
+                  <span><label>鑿滃搧锛?/label>{{ item.details.orderDishes }}</label></span>
                 </p>
               </div>
             </div>
@@ -117,16 +112,16 @@
           <!-- <div class="item" v-if="item.type === 4 && isActive && status === 1">
             <div class="titAlready">
               <div class="tit">
-                <span>【催单】</span>{{ item.arrNew[0] }}
+                <span>銆愬偓鍗曘€?/span>{{ item.arrNew[0] }}
                 <span class="time">{{ item.createTime }}</span>
               </div>
             </div>
           </div> -->
-          <!-- 闭店 -->
+          <!-- 闂簵 -->
           <!-- <div class="item" v-if="item.type === 5 && isActive && status === 1">
             <div class="titAlready">
               <div class="tit">
-                <span>【今日数据】</span>认真工作的同时也要好好生活。<span
+                <span>銆愪粖鏃ユ暟鎹€?/span>璁ょ湡宸ヤ綔鐨勫悓鏃朵篃瑕佸ソ濂界敓娲汇€?span
                   class="time"
                   >{{ item.createTime }}</span
                 >
@@ -134,46 +129,31 @@
             </div>
           </div> -->
           <div
-            class="item"
             v-if="item.type === 5"
+            class="item"
             @mouseenter="toggleShow(item.id, index)"
             @mouseleave="mouseLeaves(index)"
           >
             <div :class="isActive ? 'titAlready' : ''">
               <div class="tit">
-                <span>【今日数据】</span>认真工作的同时也要好好生活。<span
+                <span>銆愪粖鏃ユ暟鎹€?/span>璁ょ湡宸ヤ綔鐨勫悓鏃朵篃瑕佸ソ濂界敓娲汇€?span
                   class="time"
-                  >{{ item.createTime }}</span
-                >
+                  >{{ item.createTime }}</span>
               </div>
               <div v-if="shopShow && showIndex === index" class="orderInfo">
                 <p>
-                  <span
-                    ><label>营业额：</label>{{ item.details.turnover }}</span
-                  >
-                  <span
-                    ><label>有效订单：</label
-                    >{{ item.details.validOrderCount }}笔</span
-                  >
-                  <span
-                    ><label>订单完成率：</label
-                    >{{ item.details.orderCompletionRate }}</span
-                  >
+                  <span><label>钀ヤ笟棰濓細</label>{{ item.details.turnover }}</span>
+                  <span><label>鏈夋晥璁㈠崟锛?/label>{{ item.details.validOrderCount }}绗?/span>
+                    <span><label>璁㈠崟瀹屾垚鐜囷細</label>{{ item.details.orderCompletionRate }}</span>
+                  </label></span>
                 </p>
                 <p>
-                  <span
-                    ><label>今日新增用户：</label
-                    >{{ item.details.newUsers }}</span
-                  >
-                  <span
-                    ><label>今日取消：</label
-                    >{{ item.details.cancelledOrders }}笔</span
-                  >
-                  <span
-                    ><label>今日取消金额：</label>￥{{
+                  <span><label>浠婃棩鏂板鐢ㄦ埛锛?/label>{{ item.details.newUsers }}</label></span>
+                  <span><label>浠婃棩鍙栨秷锛?/label>{{ item.details.cancelledOrders }}绗?/span>
+                    <span><label>浠婃棩鍙栨秷閲戦锛?/label>锟{
                       item.details.cancelledAmount
-                    }}</span
-                  >
+                      }}</label></span>
+                  </label></span>
                 </p>
               </div>
             </div>
@@ -201,7 +181,7 @@ import { Component, Vue, Inject } from 'vue-property-decorator'
 import Empty from '@/components/Empty/index.vue'
 import { getNewData, setNewData } from '@/utils/cookies'
 import { AppModule } from '@/store/modules/app'
-// 接口
+// 鎺ュ彛
 import {
   getInformData,
   batchMsg,
@@ -231,12 +211,12 @@ export default class extends Vue {
   get tabList() {
     return [
       {
-        label: '未读',
+        label: '鏈',
         value: 1,
         // num: this.ountUnread,
       },
       {
-        label: '已读',
+        label: '宸茶',
         value: 2,
         // num: 0,
       },
@@ -248,7 +228,7 @@ export default class extends Vue {
   created() {
     this.getData()
   }
-  // 获取列表数据
+  // 鑾峰彇鍒楄〃鏁版嵁
   async getData() {
     const parent = {
       pageNum: this.page,
@@ -262,23 +242,23 @@ export default class extends Vue {
       let objNew = {} as any
       let arrDetails = []
       this.baseData.forEach((val) => {
-        // 处理后端返回的状订单字符串转义
+        // 澶勭悊鍚庣杩斿洖鐨勭姸璁㈠崟瀛楃涓茶浆涔?
         const arrContent = val.content.split(' ')
-        // 处理催单、闭店详情数据
+        // 澶勭悊鍌崟銆侀棴搴楄鎯呮暟鎹?
         val.arrNew = arrContent
         objNew = { ...val }
-        objNew.details = eval('(' + objNew.details + ')')
+        objNew.details = this.safeParseDetails(objNew.details)
         arrDetails.push(objNew)
       })
 
       this.baseData = arrDetails
-      // this.$message.success('操作成功！')
+      // this.$message.success('鎿嶄綔鎴愬姛锛?)
     } else {
       this.$message.error(data.msg)
     }
   }
 
-  // 全部已读
+  // 鍏ㄩ儴宸茶
   async handleBatch() {
     const ids = []
     this.baseData.forEach((val) => {
@@ -290,12 +270,12 @@ export default class extends Vue {
       // this.activeIndex = 1
       this.getCountUnread()
       this.getData()
-      // this.$message.success('操作成功！')
+      // this.$message.success('鎿嶄綔鎴愬姛锛?)
     } else {
       this.$message.error(data.msg)
     }
   }
-  // 设置单个订单已读
+  // 璁剧疆鍗曚釜璁㈠崟宸茶
   async handleSetStatus(id) {
     const { data } = await setStatus(id)
     if (data.code === 1) {
@@ -307,22 +287,43 @@ export default class extends Vue {
       }
 
       // this.reload()
-      // this.$message.success('操作成功！')
+      // this.$message.success('鎿嶄綔鎴愬姛锛?)
     } else {
       this.$message.error(data.msg)
     }
   }
-  // 获取未读消息
+  // 鑾峰彇鏈娑堟伅
   async getCountUnread() {
     const { data } = await getCountUnread()
     if (data.code === 1) {
       AppModule.StatusNumber(data.data)
-      // this.$message.success('操作成功！')
+      // this.$message.success('鎿嶄綔鎴愬姛锛?)
     } else {
       this.$message.error(data.msg)
     }
   }
-  // 触发已读未读按钮
+  private safeParseDetails(payload: any): Record<string, any> {
+    if (!payload) {
+      return {}
+    }
+    if (typeof payload === 'object') {
+      return payload
+    }
+    const raw = String(payload).trim()
+    const candidates = [raw, raw.replace(/'/g, '"')]
+    for (const candidate of candidates) {
+      if (!candidate) continue
+      try {
+        return JSON.parse(candidate)
+      } catch (error) {
+        continue
+      }
+    }
+    console.warn('[inform] Unable to parse details payload', payload)
+    return {}
+  }
+
+  // 瑙﹀彂宸茶鏈鎸夐挳
   handleClass(index) {
     this.activeIndex = index
     if (index === 0) {
@@ -332,7 +333,7 @@ export default class extends Vue {
     }
     this.getData()
   }
-  // 下拉菜单显示
+  // 涓嬫媺鑿滃崟鏄剧ず
   toggleShow(id, index) {
     this.shopShow = true
     this.showIndex = index
@@ -349,7 +350,7 @@ export default class extends Vue {
       }
     }, 1000)
   }
-  // 下拉菜单隐藏
+  // 涓嬫媺鑿滃崟闅愯棌
   mouseLeaves(index) {
     this.shopShow = false
     this.showIndex = index

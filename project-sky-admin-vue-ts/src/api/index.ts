@@ -50,7 +50,6 @@ request({
 //     'method': 'get'
 //   })
 
-
 // 营业额统计
 export const getTurnoverStatistics= (params: any) =>
   request({
@@ -92,6 +91,6 @@ request({
     return request({
       url: '/report/export',
       method: 'get',
-      responseType: "blob"
+      responseType: 'blob'
     })
   }

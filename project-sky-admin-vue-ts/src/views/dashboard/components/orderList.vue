@@ -15,8 +15,9 @@
               :class="item.num >= 10 ? 'badgeW' : ''"
               :value="item.num > 99 ? '99+' : item.num"
               :hidden="!([2, 3].includes(item.value) && item.num)"
-              >{{ item.label }}</el-badge
             >
+              {{ item.label }}
+            </el-badge>
           </li>
         </ul>
       </h2>
@@ -29,7 +30,7 @@
             style="width: 100%"
             @row-click="handleTable"
           >
-            <el-table-column prop="number" label="订单号"> </el-table-column>
+            <el-table-column prop="number" label="订单号" />
             <el-table-column label="订单菜品">
               <template slot-scope="scope">
                 <div class="ellipsisHidden">
@@ -70,9 +71,8 @@
               sortable
               class-name="orderTime"
               min-width="130"
-            >
-            </el-table-column>
-            <el-table-column prop="amount" label="实收金额"> </el-table-column>
+            />
+            <el-table-column prop="amount" label="实收金额" />
             <el-table-column label="备注">
               <template slot-scope="scope">
                 <div class="ellipsisHidden">
@@ -89,13 +89,12 @@
               </template>
             </el-table-column>
             <el-table-column
+              v-if="status === 3"
               prop="tablewareNumber"
               label="餐具数量"
               min-width="80"
               align="center"
-              v-if="status === 3"
-            >
-            </el-table-column>
+            />
             <el-table-column
               label="操作"
               align="center"
@@ -104,8 +103,8 @@
                 [2, 3].includes(dialogOrderStatus)
                   ? 130
                   : [0].includes(dialogOrderStatus)
-                  ? 140
-                  : 'auto'
+                    ? 140
+                    : 'auto'
               "
             >
               <template slot-scope="{ row }">
@@ -250,7 +249,9 @@
           </div>
 
           <div class="dish-info">
-            <div class="dish-label">菜品</div>
+            <div class="dish-label">
+              菜品
+            </div>
             <div class="dish-list">
               <div
                 v-for="(item, index) in diaForm.orderDetailList"
@@ -259,35 +260,31 @@
               >
                 <span class="dish-name">{{ item.name }}</span>
                 <span class="dish-num">x{{ item.number }}</span>
-                <span class="dish-price"
-                  >￥{{ item.amount ? item.amount.toFixed(2) : '' }}</span
-                >
+                <span class="dish-price">￥{{ item.amount ? item.amount.toFixed(2) : '' }}</span>
               </div>
             </div>
             <div class="dish-all-amount">
               <label>菜品小计</label>
-              <span
-                >￥{{
-                  (diaForm.amount - 6 - diaForm.packAmount).toFixed(2)
-                }}</span
-              >
+              <span>￥{{
+                (diaForm.amount - 6 - diaForm.packAmount).toFixed(2)
+              }}</span>
             </div>
           </div>
         </div>
 
         <div class="order-bottom">
           <div class="amount-info">
-            <div class="amount-label">费用</div>
+            <div class="amount-label">
+              费用
+            </div>
             <div class="amount-list">
               <div class="dish-amount">
                 <span class="amount-name">菜品小计：</span>
-                <span class="amount-price"
-                  >￥{{
-                    ((diaForm.amount - 6 - diaForm.packAmount).toFixed(2) *
-                      100) /
+                <span class="amount-price">￥{{
+                  ((diaForm.amount - 6 - diaForm.packAmount).toFixed(2) *
+                    100) /
                     100
-                  }}</span
-                >
+                }}</span>
               </div>
               <div class="send-amount">
                 <span class="amount-name">派送费：</span>
@@ -295,23 +292,19 @@
               </div>
               <div class="package-amount">
                 <span class="amount-name">打包费：</span>
-                <span class="amount-price"
-                  >￥{{
-                    diaForm.packAmount
-                      ? (diaForm.packAmount.toFixed(2) * 100) / 100
-                      : ''
-                  }}</span
-                >
+                <span class="amount-price">￥{{
+                  diaForm.packAmount
+                    ? (diaForm.packAmount.toFixed(2) * 100) / 100
+                    : ''
+                }}</span>
               </div>
               <div class="all-amount">
                 <span class="amount-name">合计：</span>
-                <span class="amount-price"
-                  >￥{{
-                    diaForm.amount
-                      ? (diaForm.amount.toFixed(2) * 100) / 100
-                      : ''
-                  }}</span
-                >
+                <span class="amount-price">￥{{
+                  diaForm.amount
+                    ? (diaForm.amount.toFixed(2) * 100) / 100
+                    : ''
+                }}</span>
               </div>
               <div class="pay-type">
                 <span class="pay-name">支付渠道：</span>
@@ -331,43 +324,36 @@
         <el-checkbox
           v-if="dialogOrderStatus === 2 && status === 2"
           v-model="isAutoNext"
-          >处理完自动跳转下一条</el-checkbox
-        >
+        >处理完自动跳转下一条</el-checkbox>
         <el-button
           v-if="dialogOrderStatus === 2"
           @click="orderReject(row, $event), (isTableOperateBtn = false)"
-          >拒 单</el-button
-        >
+        >拒 单</el-button>
         <el-button
           v-if="dialogOrderStatus === 2"
           type="primary"
           @click="orderAccept(row, $event), (isTableOperateBtn = false)"
-          >接 单</el-button
-        >
+        >接 单</el-button>
 
         <el-button
           v-if="[1, 3, 4, 5].includes(dialogOrderStatus)"
           @click="dialogVisible = false"
-          >返 回</el-button
-        >
+        >返 回</el-button>
         <el-button
           v-if="dialogOrderStatus === 3"
           type="primary"
           @click="cancelOrDeliveryOrComplete(3, row.id, $event)"
-          >派 送</el-button
-        >
+        >派 送</el-button>
         <el-button
           v-if="dialogOrderStatus === 4"
           type="primary"
           @click="cancelOrDeliveryOrComplete(4, row.id, $event)"
-          >完 成</el-button
-        >
+        >完 成</el-button>
         <el-button
           v-if="[1].includes(dialogOrderStatus)"
           type="primary"
           @click="cancelOrder(row, $event)"
-          >取消订单</el-button
-        >
+        >取消订单</el-button>
       </span>
     </el-dialog>
     <!-- end -->
@@ -405,9 +391,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click=";(cancelDialogVisible = false), (cancelReason = '')"
-          >取 消</el-button
-        >
+        <el-button @click=";(cancelDialogVisible = false), (cancelReason = '')">取 消</el-button>
         <el-button type="primary" @click="confirmCancel">确 定</el-button>
       </span>
     </el-dialog>
@@ -618,7 +602,7 @@ export default class extends Vue {
       return this.$message.error(`请输入${this.cancelDialogTitle}原因`)
     }
 
-    ;(this.cancelDialogTitle === '取消' ? orderCancel : orderReject)({
+    (this.cancelDialogTitle === '取消' ? orderCancel : orderReject)({
       id: this.orderId,
       // eslint-disable-next-line standard/computed-property-even-spacing
       [this.cancelDialogTitle === '取消' ? 'cancelReason' : 'rejectionReason']:

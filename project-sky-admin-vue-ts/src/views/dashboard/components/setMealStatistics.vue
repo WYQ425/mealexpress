@@ -6,16 +6,16 @@
     <div class="orderviewBox">
       <ul>
         <li>
-          <span class="status"><i class="iconfont icon-open"></i>已启售</span>
+          <span class="status"><i class="iconfont icon-open" />已启售</span>
           <span class="num">{{ setMealData.sold }}</span>
         </li>
         <li>
-          <span class="status"><i class="iconfont icon-stop"></i>已停售</span>
+          <span class="status"><i class="iconfont icon-stop" />已停售</span>
           <span class="num">{{ setMealData.discontinued }}</span>
         </li>
         <li class="add">
           <router-link to="setmeal/add">
-            <i></i>
+            <i />
             <p>新增套餐</p>
           </router-link>
         </li>

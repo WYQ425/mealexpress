@@ -2,26 +2,16 @@
   <div class="dashboard-container">
     <HeadLable :but-list="true">
       <div class="headBut">
-        <span :class="{ act: act === 'day' }" @click="dateAct('day')"
-          >日报</span
-        >
-        <span :class="{ act: act === 'week' }" @click="dateAct('week')"
-          >周报</span
-        >
-        <span :class="{ act: act === 'mouth' }" @click="dateAct('mouth')"
-          >月报</span
-        >
+        <span :class="{ act: act === 'day' }" @click="dateAct('day')">日报</span>
+        <span :class="{ act: act === 'week' }" @click="dateAct('week')">周报</span>
+        <span :class="{ act: act === 'mouth' }" @click="dateAct('mouth')">月报</span>
       </div>
     </HeadLable>
     <div class="topLable">
       <div class="tit">
         <span v-if="act === 'day'">统计时间：00：00 - 24：00</span>
-        <span v-if="act === 'week'"
-          >统计时间：{{ stateTime }} -{{ endTime }}</span
-        >
-        <span v-if="act === 'mouth'"
-          >统计时间：{{ stateTime }} -{{ endTime }}</span
-        >
+        <span v-if="act === 'week'">统计时间：{{ stateTime }} -{{ endTime }}</span>
+        <span v-if="act === 'mouth'">统计时间：{{ stateTime }} -{{ endTime }}</span>
       </div>
       <div v-if="act === 'day'" class="dataSelect">
         <div>
@@ -86,7 +76,7 @@
               width="45"
               height="43"
               alt=""
-            />
+            >
           </div>
           <div class="item">
             <div>实收金额</div>
@@ -96,7 +86,7 @@
         </div>
         <div class="box noData">
           <div class="icon">
-            <img src="./../../assets/icons/jine_m-2@2x.png" width="50" alt="" />
+            <img src="./../../assets/icons/jine_m-2@2x.png" width="50" alt="">
           </div>
           <div class="item">
             <div>未收金额</div>
@@ -106,7 +96,7 @@
         </div>
         <div class="box employee">
           <div class="icon">
-            <img src="./../../assets/icons/renshu@2x.png" width="46" alt="" />
+            <img src="./../../assets/icons/renshu@2x.png" width="46" alt="">
           </div>
           <div class="item">
             <div>就餐人数</div>
@@ -120,13 +110,11 @@
           <span
             :class="{ butAct: typeA == 1 }"
             @click="topActiveHandle('typeA')"
-            >按金额</span
-          >
+          >按金额</span>
           <span
             :class="{ butAct: typeA == 2 }"
             @click="topActiveHandle('typeA')"
-            >按单数</span
-          >
+          >按单数</span>
         </div>
         <Basic
           v-if="chartDataA"
@@ -143,13 +131,11 @@
             <span
               :class="{ butAct: typeB == 1 }"
               @click="topActiveHandle('typeB')"
-              >按金额</span
-            >
+            >按金额</span>
             <span
               :class="{ butAct: typeB == 2 }"
               @click="topActiveHandle('typeB')"
-              >按销量</span
-            >
+            >按销量</span>
           </div>
           <BarChart :chart-data="chartDataC" title="菜品分类占比" />
         </div>
@@ -164,15 +150,14 @@
           <BarChart id="bar" :chart-data="chartDataD" title="店内收款构成" />
         </div>
         <div class="itemList">
-          <div class="title">优惠指标</div>
+          <div class="title">
+            优惠指标
+          </div>
           <div class="item topLab">
-            <span>优惠合计</span><span>{{ discountTotal / 100 }}元</span
-            ><span>{{ discountPercentTotal * 100 }}%</span>
+            <span>优惠合计</span><span>{{ discountTotal / 100 }}元</span><span>{{ discountPercentTotal * 100 }}%</span>
           </div>
           <div v-for="(item, index) in discount" :key="index" class="item">
-            <span>{{ item.name }}</span
-            ><span>{{ item.value / 100 }}元</span
-            ><span>{{ item.percent * 100 }}%</span>
+            <span>{{ item.name }}</span><span>{{ item.value / 100 }}元</span><span>{{ item.percent * 100 }}%</span>
           </div>
         </div>
       </div>
@@ -446,7 +431,7 @@ export default class extends Vue {
           data &&
             data.length > 0 &&
             data.forEach((item: any) => {
-              ;(charts.legendData as Array<string>).push(item.name as string)
+              (charts.legendData as Array<string>).push(item.name as string)
               ;(charts.selected as any)[item.name] = true
             })
           this.chartDataC = charts
@@ -481,7 +466,7 @@ export default class extends Vue {
           data &&
             data.length > 0 &&
             data.forEach((item: any) => {
-              ;(charts.legendData as Array<string>).push(item.name as string)
+              (charts.legendData as Array<string>).push(item.name as string)
               ;(charts.selected as any)[item.name] = true
             })
           this.chartDataD = charts
@@ -631,7 +616,7 @@ export default class extends Vue {
           data &&
             data.length > 0 &&
             data.forEach((item: any) => {
-              ;(charts.legendData as Array<string>).push(item.name as string)
+              (charts.legendData as Array<string>).push(item.name as string)
               ;(charts.selected as any)[item.name] = true
             })
           this.chartDataD = charts
@@ -670,7 +655,7 @@ export default class extends Vue {
           }
           data.length > 0 &&
             data.forEach((item: any) => {
-              ;(charts.legendData as Array<string>).push(item.name as string)
+              (charts.legendData as Array<string>).push(item.name as string)
               ;(charts.selected as any)[item.name] = true
             })
           this.chartDataC = charts

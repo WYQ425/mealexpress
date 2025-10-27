@@ -1,6 +1,7 @@
 package com.sky.utils;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -16,6 +17,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,8 @@ import java.util.Map;
  */
 public class HttpClientUtil {
 
-    static final  int TIMEOUT_MSEC = 5 * 1000;
+    static final int TIMEOUT_MSEC = 5 * 1000;
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
      * 发送GET方式请求
@@ -138,14 +141,10 @@ public class HttpClientUtil {
             HttpPost httpPost = new HttpPost(url);
 
             if (paramMap != null) {
-                //构造json格式数据
-                JSONObject jsonObject = new JSONObject();
-                for (Map.Entry<String, String> param : paramMap.entrySet()) {
-                    jsonObject.put(param.getKey(),param.getValue());
-                }
-                StringEntity entity = new StringEntity(jsonObject.toString(),"utf-8");
+                String jsonPayload = toJson(paramMap);
+                StringEntity entity = new StringEntity(jsonPayload, StandardCharsets.UTF_8);
                 //设置请求编码
-                entity.setContentEncoding("utf-8");
+                entity.setContentEncoding(StandardCharsets.UTF_8.name());
                 //设置数据类型
                 entity.setContentType("application/json");
                 httpPost.setEntity(entity);
@@ -156,18 +155,25 @@ public class HttpClientUtil {
             // 执行http请求
             response = httpClient.execute(httpPost);
 
-            resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+            resultString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw e;
         } finally {
             try {
-                response.close();
+                if (response != null) {
+                    response.close();
+                }
+                httpClient.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         return resultString;
+    }
+
+    private static String toJson(Map<String, String> paramMap) throws JsonProcessingException {
+        return OBJECT_MAPPER.writeValueAsString(paramMap);
     }
     private static RequestConfig builderRequestConfig() {
         return RequestConfig.custom()

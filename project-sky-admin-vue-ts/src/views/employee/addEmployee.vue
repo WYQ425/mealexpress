@@ -1,14 +1,16 @@
 <template>
   <div class="addBrand-container">
     <HeadLable :title="title"
-               :goback="true" />
+               :goback="true"
+    />
     <div class="container">
       <el-form ref="ruleForm"
                :model="ruleForm"
                :rules="rules"
                :inline="false"
                label-width="180px"
-               class="demo-ruleForm">
+               class="demo-ruleForm"
+      >
         <!--          <el-form-item label="员工职级" prop="region">-->
         <!--            <el-select v-model="ruleForm.region" placeholder="请选择品牌名称">-->
         <!--              <el-option label="区域一" value="shanghai"></el-option>-->
@@ -17,16 +19,20 @@
         <!--            <el-button @click="submitForm('ruleForm')" type="primary" class="continue" style="margin-left: 10px;" >+新增职级</el-button>-->
         <!--          </el-form-item>-->
         <el-form-item label="账号:"
-                      prop="username">
+                      prop="username"
+        >
           <el-input v-model="ruleForm.username"
                     placeholder="请输入账号"
-                    maxlength="20" />
+                    maxlength="20"
+          />
         </el-form-item>
         <el-form-item label="员工姓名:"
-                      prop="name">
+                      prop="name"
+        >
           <el-input v-model="ruleForm.name"
                     placeholder="请输入员工姓名"
-                    maxlength="12" />
+                    maxlength="12"
+          />
         </el-form-item>
         <!-- <el-form-item
           label="密码:"
@@ -51,13 +57,16 @@
           />
         </el-form-item> -->
         <el-form-item label="手机号:"
-                      prop="phone">
+                      prop="phone"
+        >
           <el-input v-model="ruleForm.phone"
                     placeholder="请输入手机号"
-                    maxlength="11" />
+                    maxlength="11"
+          />
         </el-form-item>
         <el-form-item label="性别:"
-                      prop="sex">
+                      prop="sex"
+        >
           <el-radio-group v-model="ruleForm.sex">
             <el-radio label="男" />
             <el-radio label="女" />
@@ -65,10 +74,12 @@
         </el-form-item>
         <el-form-item label="身份证号:"
                       prop="idNumber"
-                      class="idNumber">
+                      class="idNumber"
+        >
           <el-input v-model="ruleForm.idNumber"
                     placeholder="请输入身份证号"
-                    maxlength="20" />
+                    maxlength="20"
+          />
         </el-form-item>
         <div class="subBox address">
           <!-- <el-form-item> -->
@@ -77,12 +88,14 @@
           </el-button>
           <el-button type="primary"
                      :class="{ continue: actionType === 'add' }"
-                     @click="submitForm('ruleForm', false)">
+                     @click="submitForm('ruleForm', false)"
+          >
             保存
           </el-button>
           <el-button v-if="actionType == 'add'"
                      type="primary"
-                     @click="submitForm('ruleForm', true)">
+                     @click="submitForm('ruleForm', true)"
+          >
             保存并继续添加
           </el-button>
           <!-- </el-form-item> -->
@@ -235,7 +248,7 @@ export default class extends Vue {
   }
 
   private submitForm(formName: any, st: any) {
-    ;(this.$refs[formName] as any).validate((valid: any) => {
+    (this.$refs[formName] as any).validate((valid: any) => {
       if (valid) {
         if (this.actionType === 'add') {
           const params = {

@@ -1,11 +1,17 @@
 <template>
   <div class="container">
-    <h2 class="homeTitle">用户统计</h2>
+    <h2 class="homeTitle">
+      用户统计
+    </h2>
     <div class="charBox">
-      <div id="usermain" style="width: 100%; height: 320px"></div>
+      <div id="usermain" style="width: 100%; height: 320px" />
       <ul class="orderListLine user">
-        <li class="one"><span></span>用户总量（个）</li>
-        <li class="three"><span></span>新增用户（个）</li>
+        <li class="one">
+          <span />用户总量（个）
+        </li>
+        <li class="three">
+          <span />新增用户（个）
+        </li>
       </ul>
     </div>
   </div>

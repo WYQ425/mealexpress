@@ -2,27 +2,34 @@
   <div class="addDish">
     <div class="leftCont">
       <div v-show="seachKey.trim() == ''"
-           class="tabBut">
+           class="tabBut"
+      >
         <span v-for="(item, index) in dishType"
               :key="index"
               :class="{ act: index == keyInd }"
-              @click="checkTypeHandle(index, item.id)">{{ item.name }}</span>
+              @click="checkTypeHandle(index, item.id)"
+        >{{ item.name }}</span>
       </div>
       <div class="tabList">
         <div class="table"
-             :class="{ borderNone: !dishList.length }">
+             :class="{ borderNone: !dishList.length }"
+        >
           <div v-if="dishList.length == 0"
-               style="padding-left: 10px">
+               style="padding-left: 10px"
+          >
             <Empty />
           </div>
           <el-checkbox-group v-if="dishList.length > 0"
                              v-model="checkedList"
-                             @change="checkedListHandle">
+                             @change="checkedListHandle"
+          >
             <div v-for="(item, index) in dishList"
                  :key="item.name + item.id"
-                 class="items">
+                 class="items"
+            >
               <el-checkbox :key="index"
-                           :label="item.name">
+                           :label="item.name"
+              >
                 <div class="item">
                   <span style="flex: 3; text-align: left">{{
                     item.dishName
@@ -43,13 +50,16 @@
       <div class="items">
         <div v-for="(item, ind) in checkedListAll"
              :key="ind"
-             class="item">
+             class="item"
+        >
           <span>{{ item.dishName || item.name }}</span>
           <span class="price">￥ {{ (Number(item.price) ).toFixed(2)*100/100 }} </span>
           <span class="del"
-                @click="delCheck(item.name)">
+                @click="delCheck(item.name)"
+          >
             <img src="./../../../assets/icons/btn_clean@2x.png"
-                 alt="">
+                 alt=""
+            >
           </span>
         </div>
       </div>

@@ -16,8 +16,7 @@
         :key="ind"
         class="items"
         @click="checkOption(it, ind)"
-        >{{ it.name }}</span
-      >
+      >{{ it.name }}</span>
       <span v-if="dishFlavorsData == []" class="none">无数据</span>
     </div>
   </div>

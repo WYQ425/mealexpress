@@ -6,32 +6,36 @@
     class="pwdCon"
     @close="handlePwdClose()"
   >
-    <el-form :model="form" label-width="85px" :rules="rules" ref="form">
+    <el-form ref="form" :model="form" label-width="85px" :rules="rules">
       <el-form-item label="原始密码：" prop="oldPassword">
         <el-input
           v-model="form.oldPassword"
           type="password"
           placeholder="请输入"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="新密码：" prop="newPassword">
         <el-input
           v-model="form.newPassword"
           type="password"
           placeholder="6 - 20位密码，数字或字母，区分大小写"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="确认密码：" prop="affirmPassword">
         <el-input
           v-model="form.affirmPassword"
           type="password"
           placeholder="请输入"
-        ></el-input>
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="handlePwdClose()">取 消</el-button>
-      <el-button type="primary" @click="handleSave()">保 存</el-button>
+      <el-button @click="handlePwdClose()">
+        取 消
+      </el-button>
+      <el-button type="primary" @click="handleSave()">
+        保 存
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -72,7 +76,7 @@ export default class extends Vue {
   private form = {} as any
   private affirmPassword = ''
   handleSave() {
-    ;(this.$refs.form as ElForm).validate(async (valid: boolean) => {
+    (this.$refs.form as ElForm).validate(async (valid: boolean) => {
       if (valid) {
         const parnt = {
           oldPassword: this.form.oldPassword,
@@ -87,7 +91,7 @@ export default class extends Vue {
     })
   }
   handlePwdClose() {
-    ;(this.$refs.form as ElForm).resetFields()
+    (this.$refs.form as ElForm).resetFields()
     this.$emit('handleclose')
   }
 }

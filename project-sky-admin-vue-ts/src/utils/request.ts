@@ -10,8 +10,14 @@ import {
 import router from '@/router'
 const CancelToken = axios.CancelToken;
 
+const resolvedBaseURL = process.env.VUE_APP_BASE_API || '/api/admin'
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line no-console
+  console.info('[axios] baseURL =', resolvedBaseURL)
+}
+
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: resolvedBaseURL,
   'timeout': 600000
 })
 
@@ -80,8 +86,10 @@ service.interceptors.response.use(
       // const res = response.data
       // return response
     }
-    //请求响应中的config的url会带上代理的api需要去掉
-    response.config.url = response.config.url.replace('/api', '')
+    // 请求响应中的 config.url 可能以 /api 前缀代理，规范化避免干扰去重逻辑
+    if (response.config && typeof response.config.url === 'string' && response.config.url.startsWith('/api')) {
+      response.config.url = response.config.url.slice('/api'.length)
+    }
     // 请求完成，删除请求中状态
     const key = getRequestKey(response.config);
     removePending(key);
@@ -111,8 +119,9 @@ service.interceptors.response.use(
           error.message = '请求错误'
       }
     }
-    //请求响应中的config的url会带上代理的api需要去掉
-    error.config.url = error.config.url.replace('/api', '')
+    if (error.config && typeof error.config.url === 'string' && error.config.url.startsWith('/api')) {
+      error.config.url = error.config.url.slice('/api'.length)
+    }
     // 请求完成，删除请求中状态
     const key = getRequestKey(error.config);
     removePending(key);

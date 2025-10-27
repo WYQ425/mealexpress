@@ -5,11 +5,13 @@
          :key="item.value"
          class="tab-item"
          :class="{ active: item.value === activeIndex }"
-         @click="tabChange(item.value)">
+         @click="tabChange(item.value)"
+    >
       <el-badge :class="{'special-item':item.num<10}"
                 class="item"
                 :value="item.num > 99 ? '99+' : item.num"
-                :hidden="!([2, 3, 4].includes(item.value) && item.num)">
+                :hidden="!([2, 3, 4].includes(item.value) && item.num)"
+      >
         {{ item.label }}
       </el-badge>
     </div>

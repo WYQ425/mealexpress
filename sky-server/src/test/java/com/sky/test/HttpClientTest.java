@@ -9,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
  * 测试HttpClient得两个请求
  */
 @SpringBootTest
+@Disabled("Requires running gateway service on localhost:8088")
 public class HttpClientTest {
 
     /**
@@ -29,7 +31,7 @@ public class HttpClientTest {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         //2、创建请求对象httpGET,通过new对象指定url
-        HttpGet httpGet = new HttpGet("http://localhost:8080/user/shop/status");
+        HttpGet httpGet = new HttpGet("http://localhost:8088/user/shop/status");
 
         //3、通过HttpClient对象得execute方法传进请求对象httpGET来发送请求，返回响应结果对象,异常抛出
         CloseableHttpResponse response = httpClient.execute(httpGet);
@@ -56,7 +58,7 @@ public class HttpClientTest {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         //创建请求对象
-        HttpPost httpPost = new HttpPost("http://localhost:8080/admin/employee/login");
+        HttpPost httpPost = new HttpPost("http://localhost:8088/admin/employee/login");
 
         //设置请求参数
         JSONObject jsonObject = new JSONObject();

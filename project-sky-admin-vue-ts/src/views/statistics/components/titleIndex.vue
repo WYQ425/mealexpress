@@ -3,14 +3,14 @@
     <div class="month">
       <ul class="tabs">
         <li
-          class="li-tab"
           v-for="(item, index) in tabsParam"
-          @click="toggleTabs(index)"
-          :class="{ active: index === nowIndex }"
           :key="index"
+          class="li-tab"
+          :class="{ active: index === nowIndex }"
+          @click="toggleTabs(index)"
         >
           {{ item }}
-          <span></span>
+          <span />
         </li>
       </ul>
     </div>
@@ -24,8 +24,9 @@
       icon="iconfont icon-download"
       class="right-el-button"
       @click="handleExport"
-      >数据导出</el-button
     >
+      数据导出
+    </el-button>
   </div>
 </template>
 
