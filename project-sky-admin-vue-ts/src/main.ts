@@ -34,7 +34,7 @@ Vue.prototype.moment = moment
 Vue.prototype.$checkProcessEnv = checkProcessEnv
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
- return routerPush.call(this, location).catch(error=> error)
+ return routerPush.call(this, location).catch(error => error)
 }
 Vue.prototype.$echarts = echarts
 new Vue({

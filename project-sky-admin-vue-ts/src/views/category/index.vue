@@ -2,84 +2,100 @@
   <div class="dashboard-container">
     <div class="container">
       <div class="tableBar"
-           style="display: inline-block; width: 100%">
+           style="display: inline-block; width: 100%"
+      >
         <label style="margin-right: 10px">分类名称：</label>
         <el-input v-model="name"
                   placeholder="请填写分类名称"
                   style="width: 15%"
                   clearable
                   @clear="init"
-                  @keyup.enter.native="init" />
+                  @keyup.enter.native="init"
+        />
 
         <label style="margin-right: 5px; margin-left: 20px">分类类型：</label>
         <el-select v-model="categoryType"
                    placeholder="请选择"
                    clearable
                    style="width: 15%"
-                   @clear="init">
+                   @clear="init"
+        >
           <el-option v-for="item in options"
                      :key="item.value"
                      :label="item.label"
-                     :value="item.value" />
+                     :value="item.value"
+          />
         </el-select>
 
         <div style="float: right">
           <el-button type="primary"
                      class="continue"
-                     @click="addClass('class')">
+                     @click="addClass('class')"
+          >
             + 新增菜品分类
           </el-button>
           <el-button type="primary"
                      style="margin-left:20px"
-                     @click="addClass('meal')">
+                     @click="addClass('meal')"
+          >
             + 新增套餐分类
           </el-button>
         </div>
 
         <el-button class="normal-btn continue"
-                   @click="init(true)">
+                   @click="init(true)"
+        >
           查询
         </el-button>
       </div>
       <el-table v-if="tableData.length"
                 :data="tableData"
                 stripe
-                class="tableBox">
+                class="tableBox"
+      >
         <el-table-column prop="name"
-                         label="分类名称" />
+                         label="分类名称"
+        />
         <el-table-column prop="type"
-                         label="分类类型">
+                         label="分类类型"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.type == '1' ? '菜品分类' : '套餐分类' }}</span>
           </template>
         </el-table-column>
 
         <el-table-column prop="sort"
-                         label="排序" />
+                         label="排序"
+        />
         <el-table-column label="状态">
           <template slot-scope="scope">
             <div class="tableColumn-status"
-                 :class="{ 'stop-use': String(scope.row.status) === '0' }">
+                 :class="{ 'stop-use': String(scope.row.status) === '0' }"
+            >
               {{ String(scope.row.status) === '0' ? '禁用' : '启用' }}
             </div>
           </template>
         </el-table-column>
         <el-table-column prop="updateTime"
-                         label="操作时间" />
+                         label="操作时间"
+        />
         <el-table-column label="操作"
                          width="200"
-                         align="center">
+                         align="center"
+        >
           <template slot-scope="scope">
             <el-button type="text"
                        size="small"
                        class="blueBug"
-                       @click="editHandle(scope.row)">
+                       @click="editHandle(scope.row)"
+            >
               修改
             </el-button>
             <el-button type="text"
                        size="small"
                        class="delBut"
-                       @click="deleteHandle(scope.row.id)">
+                       @click="deleteHandle(scope.row.id)"
+            >
               删除
             </el-button>
             <el-button type="text"
@@ -89,14 +105,16 @@
                          blueBug: scope.row.status == '0',
                          delBut: scope.row.status != '0'
                        }"
-                       @click="statusHandle(scope.row)">
+                       @click="statusHandle(scope.row)"
+            >
               {{ scope.row.status == '1' ? '禁用' : '启用' }}
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <Empty v-else
-             :is-search="isSearch" />
+             :is-search="isSearch"
+      />
       <el-pagination v-if="counts > 10"
                      class="pageList"
                      :page-sizes="[10, 20, 30, 40]"
@@ -104,43 +122,54 @@
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="counts"
                      @size-change="handleSizeChange"
-                     @current-change="handleCurrentChange" />
+                     @current-change="handleCurrentChange"
+      />
     </div>
     <el-dialog :title="classData.title"
                :visible.sync="classData.dialogVisible"
                width="30%"
-               :before-close="handleClose">
+               :before-close="handleClose"
+    >
       <el-form ref="classData"
                :model="classData"
                class="demo-form-inline"
                :rules="rules"
-               label-width="100px">
+               label-width="100px"
+      >
         <el-form-item label="分类名称："
-                      prop="name">
+                      prop="name"
+        >
           <el-input v-model="classData.name"
                     placeholder="请输入分类名称"
-                    maxlength="20" />
+                    maxlength="20"
+          />
         </el-form-item>
         <el-form-item label="排序："
-                      prop="sort">
+                      prop="sort"
+        >
           <el-input v-model="classData.sort"
-                    placeholder="请输入排序" />
+                    placeholder="请输入排序"
+          />
         </el-form-item>
       </el-form>
       <span slot="footer"
-            class="dialog-footer">
+            class="dialog-footer"
+      >
         <el-button size="medium"
                    @click="
             ;(classData.dialogVisible = false), $refs.classData.resetFields()
-                   ">取 消</el-button>
+                   "
+        >取 消</el-button>
         <el-button type="primary"
                    :class="{ continue: actionType === 'add' }"
                    size="medium"
-                   @click="submitForm()">确 定</el-button>
+                   @click="submitForm()"
+        >确 定</el-button>
         <el-button v-if="action != 'edit'"
                    type="primary"
                    size="medium"
-                   @click="submitForm('go')">
+                   @click="submitForm('go')"
+        >
           保存并继续添加
         </el-button>
       </span>

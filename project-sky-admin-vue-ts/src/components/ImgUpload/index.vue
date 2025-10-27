@@ -11,17 +11,22 @@
                :on-remove="handleRemove"
                :on-error="handleError"
                :before-upload="beforeAvatarUpload"
-               :headers="headers">
+               :headers="headers"
+    >
       <img v-if="imageUrl"
            :src="imageUrl"
-           class="avatar">
+           class="avatar"
+      >
 
       <i v-else
-         class="el-icon-plus avatar-uploader-icon" />
+         class="el-icon-plus avatar-uploader-icon"
+      />
       <span v-if="imageUrl"
-            class="el-upload-list__item-actions">
+            class="el-upload-list__item-actions"
+      >
         <span class="el-upload-span"
-              @click.stop="oploadImgDel">
+              @click.stop="oploadImgDel"
+        >
           删除图片
         </span>
         <span class="el-upload-span"> 重新上传 </span>

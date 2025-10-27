@@ -1,17 +1,17 @@
 <template>
   <div class="dashboard-container home">
     <!-- 营业数据 -->
-    <Overview :overviewData="overviewData" />
+    <Overview :overview-data="overviewData" />
     <!-- end -->
     <!-- 订单管理 -->
-    <Orderview :orderviewData="orderviewData" />
+    <Orderview :orderview-data="orderviewData" />
     <!-- end -->
     <div class="homeMain">
       <!-- 菜品总览 -->
-      <CuisineStatistics :dishesData="dishesData" />
+      <CuisineStatistics :dishes-data="dishesData" />
       <!-- end -->
       <!-- 套餐总览 -->
-      <SetMealStatistics :setMealData="setMealData" />
+      <SetMealStatistics :set-meal-data="setMealData" />
       <!-- end -->
     </div>
     <!-- 订单信息 -->

@@ -12,12 +12,15 @@
         style="width: 120px; height: 31px"
       /> -->
       <div v-if="!isCollapse"
-           class="sidebar-logo">
+           class="sidebar-logo"
+      >
         <img src="@/assets/login/logo.png"
-             style="width: 120px; height: 31px">
+             style="width: 120px; height: 31px"
+        >
       </div>
       <div v-else
-           class="sidebar-logo-mini">
+           class="sidebar-logo-mini"
+      >
         <img src="@/assets/login/mini-logo.png">
       </div>
     </div>
@@ -30,12 +33,14 @@
                :active-text-color="variables.menuActiveText"
                :unique-opened="false"
                :collapse-transition="false"
-               mode="vertical">
+               mode="vertical"
+      >
         <sidebar-item v-for="route in routes"
                       :key="route.path"
                       :item="route"
                       :base-path="route.path"
-                      :is-collapse="isCollapse" />
+                      :is-collapse="isCollapse"
+        />
         <!-- <div class="sub-menu">
           <div class="avatarName">
             {{ name }}

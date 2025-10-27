@@ -11,9 +11,9 @@
           @clear="init"
           @keyup.enter.native="initFun"
         />
-        <el-button class="normal-btn continue" @click="init(true)"
-          >查询</el-button
-        >
+        <el-button class="normal-btn continue" @click="init(true)">
+          查询
+        </el-button>
         <el-button
           type="primary"
           style="float: right"
@@ -23,9 +23,9 @@
         </el-button>
       </div>
       <el-table
+        v-if="tableData.length"
         :data="tableData"
         stripe
-        v-if="tableData.length"
         class="tableBox"
       >
         <el-table-column prop="name" label="员工姓名" />
@@ -62,7 +62,7 @@
               :class="{
                 'disabled-text': scope.row.username === 'admin',
                 blueBug: scope.row.status == '0',
-                delBut: scope.row.status != '0',
+                delBut: scope.row.status != '0'
               }"
               @click="statusHandle(scope.row)"
             >

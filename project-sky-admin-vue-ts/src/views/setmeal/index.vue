@@ -8,18 +8,21 @@
                   style="width: 14%"
                   clearable
                   @clear="init"
-                  @keyup.enter.native="initFun" />
+                  @keyup.enter.native="initFun"
+        />
 
         <label style="margin-right: 10px; margin-left: 20px">套餐分类：</label>
         <el-select v-model="categoryId"
                    style="width: 14%"
                    placeholder="请选择"
                    clearable
-                   @clear="init">
+                   @clear="init"
+        >
           <el-option v-for="item in dishCategoryList"
                      :key="item.value"
                      :label="item.label"
-                     :value="item.value" />
+                     :value="item.value"
+          />
         </el-select>
 
         <label style="margin-right: 10px; margin-left: 20px">售卖状态：</label>
@@ -27,19 +30,23 @@
                    style="width: 14%"
                    placeholder="请选择"
                    clearable
-                   @clear="init">
+                   @clear="init"
+        >
           <el-option v-for="item in saleStatus"
                      :key="item.value"
                      :label="item.label"
-                     :value="item.value" />
+                     :value="item.value"
+          />
         </el-select>
         <el-button class="normal-btn continue"
-                   @click="init(true)">
+                   @click="init(true)"
+        >
           查询
         </el-button>
         <div class="tableLab">
           <span class="delBut non"
-                @click="deleteHandle('批量')">批量删除</span>
+                @click="deleteHandle('批量')"
+          >批量删除</span>
           <!-- <span class="blueBug non" @click="statusHandle('1')">批量启售</span>
           <span
             style="border: none"
@@ -49,7 +56,8 @@
           > -->
           <el-button type="primary"
                      style="margin-left: 15px"
-                     @click="addSetMeal('add')">
+                     @click="addSetMeal('add')"
+          >
             + 新建套餐
           </el-button>
         </div>
@@ -58,28 +66,37 @@
                 :data="tableData"
                 stripe
                 class="tableBox"
-                @selection-change="handleSelectionChange">
+                @selection-change="handleSelectionChange"
+      >
         <el-table-column type="selection"
-                         width="25" />
+                         width="25"
+        />
         <el-table-column prop="name"
-                         label="套餐名称" />
+                         label="套餐名称"
+        />
         <el-table-column prop="image"
-                         label="图片">
+                         label="图片"
+        >
           <template slot-scope="{ row }">
             <el-image style="width: 80px; height: 40px; border: none; cursor: pointer"
-                      :src="row.image">
+                      :src="row.image"
+            >
               <div slot="error"
-                   class="image-slot">
+                   class="image-slot"
+              >
                 <img src="./../../assets/noImg.png"
-                     style="width: auto; height: 40px; border: none">
+                     style="width: auto; height: 40px; border: none"
+                >
               </div>
             </el-image>
           </template>
         </el-table-column>
         <el-table-column prop="categoryName"
-                         label="套餐分类" />
+                         label="套餐分类"
+        />
         <el-table-column prop="price"
-                         label="套餐价">
+                         label="套餐价"
+        >
           <template slot-scope="scope">
             <span>￥{{ ((scope.row.price ).toFixed(2) * 100) / 100 }}</span>
           </template>
@@ -87,31 +104,36 @@
         <el-table-column label="售卖状态">
           <template slot-scope="scope">
             <div class="tableColumn-status"
-                 :class="{ 'stop-use': String(scope.row.status) === '0' }">
+                 :class="{ 'stop-use': String(scope.row.status) === '0' }"
+            >
               {{ String(scope.row.status) === '0' ? '停售' : '启售' }}
             </div>
           </template>
         </el-table-column>
         <el-table-column prop="updateTime"
-                         label="最后操作时间">
+                         label="最后操作时间"
+        >
           <!-- <template slot-scope="scope">
             {{ moment(scope.row.lastUpdateTime).format('YYYY-MM-DD h:m:s') }}
           </template> -->
         </el-table-column>
         <el-table-column label="操作"
                          width="250"
-                         align="center">
+                         align="center"
+        >
           <template slot-scope="scope">
             <el-button type="text"
                        size="small"
                        class="blueBug"
-                       @click="addSetMeal(scope.row)">
+                       @click="addSetMeal(scope.row)"
+            >
               修改
             </el-button>
             <el-button type="text"
                        size="small"
                        class="delBut"
-                       @click="deleteHandle('单删', scope.row.id)">
+                       @click="deleteHandle('单删', scope.row.id)"
+            >
               删除
             </el-button>
             <el-button type="text"
@@ -121,14 +143,16 @@
                          blueBug: scope.row.status == '0',
                          delBut: scope.row.status != '0'
                        }"
-                       @click="statusHandle(scope.row)">
+                       @click="statusHandle(scope.row)"
+            >
               {{ scope.row.status == '0' ? '启售' : '停售' }}
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <Empty v-else
-             :is-search="isSearch" />
+             :is-search="isSearch"
+      />
       <el-pagination v-if="counts > 10"
                      class="pageList"
                      :page-sizes="[10, 20, 30, 40]"
@@ -136,7 +160,8 @@
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="counts"
                      @size-change="handleSizeChange"
-                     @current-change="handleCurrentChange" />
+                     @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>

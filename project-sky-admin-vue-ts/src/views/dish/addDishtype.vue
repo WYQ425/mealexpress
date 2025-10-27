@@ -1,37 +1,47 @@
 <template>
   <div :key="vueRest"
-       class="addBrand-container">
+       class="addBrand-container"
+  >
     <div :key="restKey"
-         class="container">
+         class="container"
+    >
       <el-form ref="ruleForm"
                :model="ruleForm"
                :rules="rules"
                :inline="true"
                label-width="180px"
-               class="demo-ruleForm">
+               class="demo-ruleForm"
+      >
         <div>
           <el-form-item label="菜品名称:"
-                        prop="name">
+                        prop="name"
+          >
             <el-input v-model="ruleForm.name"
                       placeholder="请填写菜品名称"
-                      maxlength="20" />
+                      maxlength="20"
+            />
           </el-form-item>
           <el-form-item label="菜品分类:"
-                        prop="categoryId">
+                        prop="categoryId"
+          >
             <el-select v-model="ruleForm.categoryId"
-                       placeholder="请选择菜品分类">
+                       placeholder="请选择菜品分类"
+            >
               <el-option v-for="(item, index) in dishList"
                          :key="index"
                          :label="item.name"
-                         :value="item.id" />
+                         :value="item.id"
+              />
             </el-select>
           </el-form-item>
         </div>
         <div>
           <el-form-item label="菜品价格:"
-                        prop="price">
+                        prop="price"
+          >
             <el-input v-model="ruleForm.price"
-                      placeholder="请设置菜品价格" />
+                      placeholder="请设置菜品价格"
+            />
           </el-form-item>
         </div>
         <el-form-item label="口味做法配置:">
@@ -39,10 +49,12 @@
             <div class="flavorBox">
               <span v-if="dishFlavors.length == 0"
                     class="addBut"
-                    @click="addFlavore">
+                    @click="addFlavore"
+              >
                 + 添加口味</span>
               <div v-if="dishFlavors.length != 0"
-                   class="flavor">
+                   class="flavor"
+              >
                 <div class="title">
                   <span>口味名（3个字内）</span>
                   <!-- <span class="des-box">口味标签（输入标签回车添加）</span> -->
@@ -50,32 +62,39 @@
                 <div class="cont">
                   <div v-for="(item, index) in dishFlavors"
                        :key="index"
-                       class="items">
+                       class="items"
+                  >
                     <div class="itTit">
                       <!-- :dish-flavors-data="filterDishFlavorsData()" -->
                       <SelectInput :dish-flavors-data="leftDishFlavors"
                                    :index="index"
                                    :value="item.name"
-                                   @select="selectHandle" />
+                                   @select="selectHandle"
+                      />
                     </div>
                     <div class="labItems"
-                         style="display: flex">
+                         style="display: flex"
+                    >
                       <span v-for="(it, ind) in item.value"
-                            :key="ind">{{ it }}
+                            :key="ind"
+                      >{{ it }}
                         <i @click="delFlavorLabel(index, ind)">X</i></span>
                       <div class="inputBox"
-                           :style="inputStyle" />
+                           :style="inputStyle"
+                      />
                     </div>
                     <span class="delFlavor delBut non"
-                          @click="delFlavor(item.name)">删除</span>
+                          @click="delFlavor(item.name)"
+                    >删除</span>
                   </div>
                 </div>
                 <div v-if="
-                       !!this.leftDishFlavors.length &&
-                         this.dishFlavors.length < this.dishFlavorsData.length
+                       !!leftDishFlavors.length &&
+                         dishFlavors.length < dishFlavorsData.length
                      "
                      class="addBut"
-                     @click="addFlavore">
+                     @click="addFlavore"
+                >
                   添加口味
                 </div>
               </div>
@@ -84,21 +103,25 @@
         </el-form-item>
         <div>
           <el-form-item label="菜品图片:"
-                        prop="image">
+                        prop="image"
+          >
             <image-upload :prop-image-url="imageUrl"
-                          @imageChange="imageChange">
+                          @imageChange="imageChange"
+            >
               图片大小不超过2M<br>仅能上传 PNG JPEG JPG类型图片<br>建议上传200*200或300*300尺寸的图片
             </image-upload>
           </el-form-item>
         </div>
         <div class="address">
           <el-form-item label="菜品描述:"
-                        prop="region">
+                        prop="region"
+          >
             <el-input v-model="ruleForm.description"
                       type="textarea"
                       :rows="3"
                       maxlength="200"
-                      placeholder="菜品描述，最长200字" />
+                      placeholder="菜品描述，最长200字"
+            />
           </el-form-item>
         </div>
         <div class="subBox address">
@@ -107,12 +130,14 @@
           </el-button>
           <el-button type="primary"
                      :class="{ continue: actionType === 'add' }"
-                     @click="submitForm('ruleForm')">
+                     @click="submitForm('ruleForm')"
+          >
             保存
           </el-button>
           <el-button v-if="actionType == 'add'"
                      type="primary"
-                     @click="submitForm('ruleForm', 'goAnd')">
+                     @click="submitForm('ruleForm', 'goAnd')"
+          >
             保存并继续添加
           </el-button>
         </div>
@@ -343,7 +368,7 @@ export default class extends Vue {
   }
 
   private submitForm(formName: any, st: any) {
-    ;(this.$refs[formName] as any).validate((valid: any) => {
+    (this.$refs[formName] as any).validate((valid: any) => {
       console.log(valid, 'valid')
       if (valid) {
         if (!this.ruleForm.image) return this.$message.error('菜品图片不能为空')

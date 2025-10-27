@@ -1,27 +1,37 @@
 <template>
   <div class="container">
-    <h2 class="homeTitle">订单统计</h2>
+    <h2 class="homeTitle">
+      订单统计
+    </h2>
     <div class="charBox">
       <div class="orderProportion">
         <div>
           <p>订单完成率</p>
           <p>{{ (orderdata.orderCompletionRate * 100).toFixed(1) }}%</p>
         </div>
-        <div class="symbol">=</div>
+        <div class="symbol">
+          =
+        </div>
         <div>
           <p>有效订单</p>
           <p>{{ orderdata.validOrderCount }}</p>
         </div>
-        <div class="symbol">/</div>
+        <div class="symbol">
+          /
+        </div>
         <div>
           <p>订单总数</p>
           <p>{{ orderdata.totalOrderCount }}</p>
         </div>
       </div>
-      <div id="ordermain" style="width: 100%; height: 300px"></div>
+      <div id="ordermain" style="width: 100%; height: 300px" />
       <ul class="orderListLine">
-        <li class="one"><span></span>订单总数（个）</li>
-        <li class="three"><span></span>有效订单（个）</li>
+        <li class="one">
+          <span />订单总数（个）
+        </li>
+        <li class="three">
+          <span />有效订单（个）
+        </li>
       </ul>
     </div>
   </div>

@@ -43,6 +43,9 @@ module.exports = {
   },
   chainWebpack: (config) => {
     config.resolve.symlinks(true) // 修复热更新失效
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.delete('fork-ts-checker')
+    }
   },
   configureWebpack: {
     devtool: 'source-map'
